@@ -300,7 +300,8 @@
         // jsonModification('adBlockMessageViewModel', []);
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
-        jsonModification('auxiliaryUi', []);
+        // jsonModification('auxiliaryUi', []);
+        jsonModification('trackingParams', []);
         
   
         creatingFillingStyles(window.location.hostname);
@@ -318,11 +319,6 @@
             });
             removeAdsWindow();
             hideMainAds();
-
-            if (document.querySelector('.ytp-size-button') !== null || document.querySelector('.ytp-size-button') !== undefined) {
-              document.querySelector('.ytp-size-button').click();
-              document.querySelector('.ytp-size-button').click();
-            }
           }
         })
       };
