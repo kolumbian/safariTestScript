@@ -290,14 +290,14 @@
   
         jsonModification('adPlacements', []);
         jsonModification('playerAds', []);
-        // jsonModification('enforcementMessageViewModel', []);
-        // jsonModification('adSlots', []);
-        // jsonModification('adSlotAndLayoutMetadata', []);
-        // jsonModification('adBreakHeartbeatParams', []);
-        // jsonModification('adSlotRenderer', []);
-        // jsonModification('adsControlFlowOpportunityReceivedCommand', []);
+        jsonModification('enforcementMessageViewModel', []);
+        jsonModification('adSlots', []);
+        jsonModification('adSlotAndLayoutMetadata', []);
+        jsonModification('adBreakHeartbeatParams', []);
+        jsonModification('adSlotRenderer', []);
+        jsonModification('adsControlFlowOpportunityReceivedCommand', []);
         // jsonModification('adBlockMessageViewModel', []);
-        // jsonModification('bkaEnforcementMessageViewModel', []);
+        jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
         // jsonModification('adSignalsInfo', []);
         // jsonModification('userAgent', []);
