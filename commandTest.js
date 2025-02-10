@@ -293,7 +293,7 @@
         jsonModification('enforcementMessageViewModel', []);
         jsonModification('adSlots', []);
         jsonModification('adSlotAndLayoutMetadata', []);
-        jsonModification('adBreakHeartbeatParams', []);
+        // jsonModification('adBreakHeartbeatParams', []);
         jsonModification('adSlotRenderer', []);
         jsonModification('adsControlFlowOpportunityReceivedCommand', []);
         jsonModification('adSignalsInfo', []);
