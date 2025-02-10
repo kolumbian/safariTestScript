@@ -288,8 +288,8 @@
           });
         };
   
-        jsonModification('adPlacements', []);
-        jsonModification('playerAds', []);
+        // jsonModification('adPlacements', []);
+        // jsonModification('playerAds', []);
         jsonModification('enforcementMessageViewModel', []);
         jsonModification('adSlots', []);
         jsonModification('adSlotAndLayoutMetadata', []);
@@ -301,7 +301,7 @@
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
         // jsonModification('auxiliaryUi', []);
-        jsonModification('responseContext', []);
+        // jsonModification('responseContext', []);
         
   
         creatingFillingStyles(window.location.hostname);
