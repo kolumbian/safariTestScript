@@ -301,7 +301,7 @@
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
         // jsonModification('auxiliaryUi', []);
-        jsonModification('sendFeedbackAction', []);
+        jsonModification('bucket', []);
         
   
         creatingFillingStyles(window.location.hostname);
