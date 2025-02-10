@@ -301,7 +301,7 @@
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
         // jsonModification('auxiliaryUi', []);
-        jsonModification('bucket', []);
+        jsonModification('innertubeCommand', []);
         
   
         creatingFillingStyles(window.location.hostname);
