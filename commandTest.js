@@ -299,6 +299,8 @@
         // jsonModification('adBlockMessageViewModel', []);
         jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
+        jsonModification('adSignalsInfo', []);
+        jsonModification('userAgent', []);
         
   
         creatingFillingStyles(window.location.hostname);
