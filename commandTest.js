@@ -296,11 +296,11 @@
         jsonModification('adBreakHeartbeatParams', []);
         jsonModification('adSlotRenderer', []);
         jsonModification('adsControlFlowOpportunityReceivedCommand', []);
+        jsonModification('adSignalsInfo', []);
         // jsonModification('adBlockMessageViewModel', []);
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
-        jsonModification('adSignalsInfo', []);
-        jsonModification('userAgent', []);
+        jsonModification('auxiliaryUi', []);
         
   
         creatingFillingStyles(window.location.hostname);
