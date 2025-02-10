@@ -301,7 +301,7 @@
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
         // jsonModification('auxiliaryUi', []);
-        jsonModification('isVisible', []);
+        jsonModification('displayType', []);
         
   
         creatingFillingStyles(window.location.hostname);
