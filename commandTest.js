@@ -301,7 +301,7 @@
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
         // jsonModification('auxiliaryUi', []);
-        jsonModification('innertubeCommand', []);
+        jsonModification('adsEngagementPanelContentRenderer', []);
         
   
         creatingFillingStyles(window.location.hostname);
