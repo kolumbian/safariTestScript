@@ -297,10 +297,10 @@
         jsonModification('adSlotRenderer', []);
         jsonModification('adsControlFlowOpportunityReceivedCommand', []);
         // jsonModification('adBlockMessageViewModel', []);
-        jsonModification('bkaEnforcementMessageViewModel', []);
+        // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
-        // jsonModification('adSignalsInfo', []);
-        // jsonModification('userAgent', []);
+        jsonModification('adSignalsInfo', []);
+        jsonModification('userAgent', []);
         
   
         creatingFillingStyles(window.location.hostname);
