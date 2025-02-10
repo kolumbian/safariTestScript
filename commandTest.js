@@ -290,15 +290,15 @@
   
         jsonModification('adPlacements', []);
         jsonModification('playerAds', []);
-        jsonModification('enforcementMessageViewModel', []);
-        jsonModification('adSlots', []);
-        jsonModification('adSlotAndLayoutMetadata', []);
+        // jsonModification('enforcementMessageViewModel', []);
+        // jsonModification('adSlots', []);
+        // jsonModification('adSlotAndLayoutMetadata', []);
         jsonModification('adBreakHeartbeatParams', []);
-        jsonModification('adSlotRenderer', []);
-        jsonModification('adsControlFlowOpportunityReceivedCommand', []);
-        jsonModification('adBlockMessageViewModel', []);
+        // jsonModification('adSlotRenderer', []);
+        // jsonModification('adsControlFlowOpportunityReceivedCommand', []);
+        // jsonModification('adBlockMessageViewModel', []);
         jsonModification('bkaEnforcementMessageViewModel', []);
-        jsonModification('genericError', []);
+        // jsonModification('genericError', []);
         
   
         creatingFillingStyles(window.location.hostname);
