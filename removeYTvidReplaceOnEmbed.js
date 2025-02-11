@@ -325,7 +325,7 @@
                 if (ifrRes && ifrRes !== 'clear') {
                     clearInterval(interval5);
                     
-                    document.querySelector('#full-bleed-container').innerHTML = ifrRes;
+                    document.querySelector('#player-container').innerHTML = ifrRes;
 
                     ifrRes = 'clear';
                 }
@@ -346,6 +346,7 @@
         creatingFillingStyles(window.location.hostname);
         
         checkURL(() => { createBlockAdlock() });
+        goToEmbed();
         removeAdsWindow();
         hideMainAds();
   
