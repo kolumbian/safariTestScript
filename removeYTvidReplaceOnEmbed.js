@@ -282,8 +282,8 @@
                 if (document.querySelector('yt-button-view-model>button-view-model>button') && !document.querySelector('yt-share-target-renderer.yt-third-party-share-target-section-renderer>button')) {
                     clearInterval(interval2);
 
-                    document.querySelector('ytd-popup-container').style.display = 'none';
-                    document.querySelector('tp-yt-iron-overlay-backdrop').style.display = 'none';
+                    //document.querySelector('ytd-popup-container').style.display = 'none';
+                    //document.querySelector('tp-yt-iron-overlay-backdrop').style.display = 'none';
                 
                     document.querySelector('yt-button-view-model>button-view-model>button').click();
 
@@ -305,7 +305,7 @@
                 if (document.querySelector('#scrollable #mirror') && document.querySelector('video') && hght !== 'clear') {
                     clearInterval(interval4);
 
-                    document.querySelector('yt-sharing-embed-renderer').style.display = 'none';
+                    //document.querySelector('yt-sharing-embed-renderer').style.display = 'none';
                     
                     document.querySelector('#embed-panel>#title-bar>yt-icon').click();
                 
