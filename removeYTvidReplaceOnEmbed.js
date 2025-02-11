@@ -271,7 +271,7 @@
                         wdth = parseInt(matches[1], 10);
                         hght = parseInt(matches[2], 10);
 
-                        console.log(wdth, hght);
+                        //console.log(wdth, hght);
                     }
 
                 }
@@ -307,13 +307,13 @@
 
                     //document.querySelector('yt-sharing-embed-renderer').style.display = 'none';
                     
-                    document.querySelector('#embed-panel>#title-bar>yt-icon').click();
+                    //document.querySelector('#embed-panel>#title-bar>yt-icon').click();
                 
                     let inner = document.querySelector('#scrollable #mirror').innerHTML;
 
                     ifrRes = inner.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&nbsp;', '').replace(/width="\d+"/, `width="${wdth}"`).replace(/height="\d+"/, `height="${hght}"`);
                 
-                    console.log(ifrRes);
+                    //console.log(ifrRes);
 
                     hght = 'clear';
                 
