@@ -283,6 +283,7 @@
                     clearInterval(interval2);
 
                     document.querySelector('ytd-popup-container').style.display = 'none';
+                    document.querySelector('tp-yt-iron-overlay-backdrop').style.display = 'none';
                 
                     document.querySelector('yt-button-view-model>button-view-model>button').click();
 
@@ -301,7 +302,7 @@
             }, 100)
 
             let interval4 = setInterval(() => {
-                if (document.querySelector('#scrollable #mirror') && document.querySelector('video')) {
+                if (document.querySelector('#scrollable #mirror') && document.querySelector('video') && hght !== 'clear') {
                     clearInterval(interval4);
 
                     document.querySelector('yt-sharing-embed-renderer').style.display = 'none';
@@ -313,16 +314,20 @@
                     ifrRes = inner.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&nbsp;', '').replace(/width="\d+"/, `width="${wdth}"`).replace(/height="\d+"/, `height="${hght}"`);
                 
                     console.log(ifrRes);
+
+                    hght = 'clear';
                 
                 }
                 
             }, 100)
 
             let interval5 = setInterval(() => {
-                if (ifrRes) {
+                if (ifrRes && ifrRes !== 'clear') {
                     clearInterval(interval5);
                     
                     document.querySelector('#full-bleed-container').innerHTML = ifrRes;
+
+                    ifrRes = 'clear';
                 }
                 
             }, 500)
