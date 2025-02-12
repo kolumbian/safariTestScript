@@ -11,6 +11,16 @@
           msg: "This is not YouTube"
         };
       }
+
+      const MutObserve = (callback) => {
+        const observer = new MutationObserver((mutations) => {
+          callback(mutations);
+        });
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true
+        });
+      };
   
       const startScript = () => {
         const targetEl = document.querySelector('body');
@@ -237,17 +247,17 @@
   
         const removeAdsWindow = () => {
           if (document.querySelector('.ad-showing')) {
-  
-            const vid = document.querySelectorAll('video[class^="video-stream"][controlslist]:not([src])');
+        
+            const vid = document.querySelector('video[class^="video-stream"][controlslist]');
             if (vid && vid.duration) {
-
+      
               vid.currentTime = vid.duration;
-
+      
               setTimeout(() => {
                 const skipButton = document.querySelector("button.ytp-ad-skip-button");
-                if (skipButton) {
-                  skipButton.click();
-                }
+                  if (skipButton) {
+                    skipButton.click();
+                  }
               }, 100);
             }
           }
@@ -271,37 +281,28 @@
           }
         };
   
-        const MutObserve = ( option ) => {
-          const targetEl = option.el;
-          const callback = option.fun;
+
   
-          const observer = new MutationObserver((mutations) => {
-            if( Boolean(mutations) ) {
-              
-              callback(mutations);
-            }
-          });
-  
-          observer.observe(targetEl, {
-            childList: true,
-            subtree: true,
-          });
-        };
-  
-        jsonModification('adPlacements', []);
-        jsonModification('playerAds', []);
-        jsonModification('enforcementMessageViewModel', []);
-        jsonModification('adSlots', []);
-        jsonModification('adSlotAndLayoutMetadata', []);
-        jsonModification('adBreakHeartbeatParams', []);
-        jsonModification('adSlotRenderer', []);
-        jsonModification('adsControlFlowOpportunityReceivedCommand', []);
-        jsonModification('adSignalsInfo', []);
+        //jsonModification('adPlacements', []);
+        //jsonModification('playerAds', []);
+        //jsonModification('enforcementMessageViewModel', []);
+        //jsonModification('adSlots', []);
+        //jsonModification('adSlotAndLayoutMetadata', []);
+        //jsonModification('adBreakHeartbeatParams', []);
+        //jsonModification('adSlotRenderer', []);
+        //jsonModification('adsControlFlowOpportunityReceivedCommand', []);
+        //jsonModification('adSignalsInfo', []);
+
+
         // jsonModification('adBlockMessageViewModel', []);
         // jsonModification('bkaEnforcementMessageViewModel', []);
         // jsonModification('genericError', []);
+
         // jsonModification('auxiliaryUi', []);
-        jsonModification('adsEngagementPanelContentRenderer', []);
+        //jsonModification('adsEngagementPanelContentRenderer', []);
+        
+        
+
         
   
         creatingFillingStyles(window.location.hostname);
@@ -309,20 +310,17 @@
         checkURL(() => { createBlockAdlock() });
         removeAdsWindow();
         hideMainAds();
-  
-        MutObserve({
-          el: document.querySelector('#app'), 
-          fun: () => {
-  
-            checkURL(() => { 
-              createBlockAdlock() 
-            });
-            removeAdsWindow();
-            hideMainAds();
-          }
-        })
+
+        MutObserve(() => {
+          checkURL(() => { 
+            createBlockAdlock() 
+          });
+          removeAdsWindow();
+          hideMainAds();
+        });
       };
   
+      startScript();
       const script = document.createElement('script');
       const scriptText = startScript.toString();
       script.innerHTML = `(${scriptText})();`;
