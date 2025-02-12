@@ -233,6 +233,28 @@
             });
           }
         };
+
+        function remCsp() {
+          const originalFetch = window.fetch;
+          const currentDomain = window.location.hostname;
+      
+          window.fetch = async function(url, options = {}) {
+              const response = await originalFetch(url, options);
+              const newHeaders = new Headers();
+      
+              for (let [key, value] of response.headers.entries()) {
+                  if (!(currentDomain && url.includes(currentDomain) && key.toLowerCase() === 'content-security-policy')) {
+                      newHeaders.append(key, value);
+                  }
+              }
+      
+              return new Response(response.body, {
+                  status: response.status,
+                  statusText: response.statusText,
+                  headers: newHeaders
+              });
+          };
+        }
   
         const MutObserve = ( option ) => {
           const targetEl = option.el;
@@ -271,7 +293,7 @@
                         wdth = parseInt(matches[1], 10);
                         hght = parseInt(matches[2], 10);
 
-                        //console.log(wdth, hght);
+                        console.log(wdth, hght);
                     }
 
                 }
@@ -282,8 +304,8 @@
                 if (document.querySelector('yt-button-view-model>button-view-model>button') && !document.querySelector('yt-share-target-renderer.yt-third-party-share-target-section-renderer>button')) {
                     clearInterval(interval2);
 
-                    //document.querySelector('ytd-popup-container').style.display = 'none';
-                    //document.querySelector('tp-yt-iron-overlay-backdrop').style.display = 'none';
+                    document.querySelector('ytd-popup-container').style.display = 'none';
+                    document.querySelector('tp-yt-iron-overlay-backdrop').style.display = 'none';
                 
                     document.querySelector('yt-button-view-model>button-view-model>button').click();
 
@@ -305,15 +327,15 @@
                 if (document.querySelector('#scrollable #mirror') && document.querySelector('video') && hght !== 'clear') {
                     clearInterval(interval4);
 
-                    //document.querySelector('yt-sharing-embed-renderer').style.display = 'none';
+                    document.querySelector('yt-sharing-embed-renderer').style.display = 'none';
                     
-                    //document.querySelector('#embed-panel>#title-bar>yt-icon').click();
+                    document.querySelector('#embed-panel>#title-bar>yt-icon').click();
                 
                     let inner = document.querySelector('#scrollable #mirror').innerHTML;
 
                     ifrRes = inner.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&nbsp;', '').replace(/width="\d+"/, `width="${wdth}"`).replace(/height="\d+"/, `height="${hght}"`);
                 
-                    //console.log(ifrRes);
+                    console.log(ifrRes);
 
                     hght = 'clear';
                 
@@ -342,11 +364,10 @@
             }, 100)
         };
         
-  
+        remCsp();
         creatingFillingStyles(window.location.hostname);
         
         checkURL(() => { createBlockAdlock() });
-        goToEmbed();
         removeAdsWindow();
         hideMainAds();
   
@@ -357,6 +378,7 @@
             checkURL(() => { 
               createBlockAdlock() 
             });
+            remCsp();
             goToEmbed();
             removeAdsWindow();
             hideMainAds();
