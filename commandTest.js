@@ -106,7 +106,8 @@
                     '.ad-container',
                     '.ytp-share-button',
                     '.ytp-ad-module',
-                    '.html5-video-player.ad-showing .ytp-title'
+                    '.html5-video-player.ad-showing .ytp-title',
+                    'ytd-ad-slot-renderer'
                 ],
                 'm.youtube.com': [
                     '[class$="-content"][section-identifier=""]>lazy-list>:not(ytm-comments-entry-point-header-renderer)',
@@ -124,6 +125,7 @@
                     'ytm-promoted-video-renderer',
                     '.ytp-ad-player-overlay',
                     'iv[class*="error"]',
+                    'ytd-ad-slot-renderer'
                 ],
             };
   
