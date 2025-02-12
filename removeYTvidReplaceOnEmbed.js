@@ -255,21 +255,14 @@
               });
           };
         }
-  
-        const MutObserve = ( option ) => {
-          const targetEl = option.el;
-          const callback = option.fun;
-  
+
+        const MutObserve = (callback) => {
           const observer = new MutationObserver((mutations) => {
-            if( Boolean(mutations) ) {
-              
-              callback(mutations);
-            }
+            callback(mutations);
           });
-  
-          observer.observe(targetEl, {
+          observer.observe(document.documentElement, {
             childList: true,
-            subtree: true,
+            subtree: true
           });
         };
         
@@ -370,27 +363,24 @@
         checkURL(() => { createBlockAdlock() });
         removeAdsWindow();
         hideMainAds();
-  
-        MutObserve({
-          el: document.querySelector('#app'), 
-          fun: () => {
-  
+
+        MutObserve(() => {
             checkURL(() => { 
-              createBlockAdlock() 
+                createBlockAdlock() 
             });
             remCsp();
             goToEmbed();
             removeAdsWindow();
             hideMainAds();
-          }
-        })
-      };
-  
-      const script = document.createElement('script');
-      const scriptText = startScript.toString();
-      script.innerHTML = `(${scriptText})();`;
-      document.head.appendChild(script);
-      document.head.removeChild(script);
+        });
+    };
+
+      startScript();
+      //const script = document.createElement('script');
+      //const scriptText = startScript.toString();
+      //script.innerHTML = `(${scriptText})();`;
+      //document.head.appendChild(script);
+      //document.head.removeChild(script);
       return {
         msg: "Ad-free YouTube is active"
       };
