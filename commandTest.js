@@ -126,7 +126,8 @@
                     'ytm-promoted-video-renderer',
                     '.ytp-ad-player-overlay',
                     'iv[class*="error"]',
-                    'ytd-ad-slot-renderer'
+                    'ytd-ad-slot-renderer',
+                    'ytp-ad-persistent-progress-bar-container'
                 ],
             };
   
