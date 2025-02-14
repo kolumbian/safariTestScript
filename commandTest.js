@@ -261,7 +261,7 @@
                     let vid = document.querySelector('video[class^="video-stream"][controlslist]');
                     if (vid && vid.duration) {
             
-                        vid.currentTime = vid.duration - 0.001;
+                        vid.currentTime = vid.duration;
                 
                         //setTimeout(() => {
                             //let skipButton = document.querySelector("button.ytp-skip-ad-button");
