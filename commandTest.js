@@ -263,12 +263,12 @@
             
                         vid.currentTime = vid.duration;
                 
-                        //setTimeout(() => {
-                            //let skipButton = document.querySelector("button.ytp-skip-ad-button");
-                            //if (skipButton) {
-                                //skipButton.click();
-                            //}
-                        //}, 100);
+                        setTimeout(() => {
+                            let skipButton = document.querySelector("button.ytp-skip-ad-button");
+                            if (skipButton) {
+                                skipButton.click();
+                            }
+                        }, 100);
                     }
                 }
             };
