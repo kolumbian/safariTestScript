@@ -107,7 +107,8 @@
                     '.ytp-share-button',
                     '.ytp-ad-module',
                     '.html5-video-player.ad-showing .ytp-title',
-                    'ytd-ad-slot-renderer'
+                    'ytd-ad-slot-renderer',
+                    'ytp-ad-persistent-progress-bar-container'
                 ],
                 'm.youtube.com': [
                     '[class$="-content"][section-identifier=""]>lazy-list>:not(ytm-comments-entry-point-header-renderer)',
@@ -208,67 +209,67 @@
                 document.head.appendChild(style);
             };
   
-            const remAdPl = () => {
-                var ytInitialPlayerResponse = null;
+            // const remAdPl = () => {
+            //     var ytInitialPlayerResponse = null;
 
-                function getter() {
-                    return ytInitialPlayerResponse;
-                }
+            //     function getter() {
+            //         return ytInitialPlayerResponse;
+            //     }
             
-                function setter(data) {
-                    ytInitialPlayerResponse = { ...data, adPlacements: [] };
-                }
+            //     function setter(data) {
+            //         ytInitialPlayerResponse = { ...data, adPlacements: [] };
+            //     }
             
-                if (window.ytInitialPlayerResponse) {
-                    Object.defineProperty(window.ytInitialPlayerResponse, 'adPlacements', {
-                        get: () => [],
-                        set: (a) => undefined,
-                        configurable: true
-                    });
-                } else {
-                    Object.defineProperty(window, 'ytInitialPlayerResponse', {
-                        get: getter,
-                        set: setter,
-                        configurable: true
-                    });
-                }
-            }
+            //     if (window.ytInitialPlayerResponse) {
+            //         Object.defineProperty(window.ytInitialPlayerResponse, 'adPlacements', {
+            //             get: () => [],
+            //             set: (a) => undefined,
+            //             configurable: true
+            //         });
+            //     } else {
+            //         Object.defineProperty(window, 'ytInitialPlayerResponse', {
+            //             get: getter,
+            //             set: setter,
+            //             configurable: true
+            //         });
+            //     }
+            // }
 
-            const fetchPolyfill = () => {
-                const {fetch: origFetch} = window;
-                window.fetch = async (...args) => {
-                    const response = await origFetch(...args);
+            // const fetchPolyfill = () => {
+            //     const {fetch: origFetch} = window;
+            //     window.fetch = async (...args) => {
+            //         const response = await origFetch(...args);
             
-                    if (response.url.includes('/youtubei/v1/player')) {
-                        const text = () =>
-                        response
-                        .clone()
-                        .text()
-                        .then((data) => data.replace(/adPlacements/, 'odPlacement'));
+            //         if (response.url.includes('/youtubei/v1/player')) {
+            //             const text = () =>
+            //             response
+            //             .clone()
+            //             .text()
+            //             .then((data) => data.replace(/adPlacements/, 'odPlacement'));
             
-                        response.text = text;
-                        return response;
-                    }
-                    return response;
-                };
-            }
+            //             response.text = text;
+            //             return response;
+            //         }
+            //         return response;
+            //     };
+            // }
   
             const removeAdsWindow = () => {
-            if (document.querySelector('.ad-showing')) {
+                if (document.querySelector('.ad-showing')) {
+                
+                    let vid = document.querySelector('video[class^="video-stream"][controlslist]');
+                    if (vid && vid.duration) {
             
-                const vid = document.querySelector('video[class^="video-stream"][controlslist]');
-                if (vid && vid.duration) {
-        
-                    vid.currentTime = vid.duration;
-            
-                    setTimeout(() => {
-                        const skipButton = document.querySelector("button.ytp-ad-skip-button");
-                        if (skipButton) {
-                            skipButton.click();
-                        }
-                    }, 100);
+                        vid.currentTime = vid.duration - 0.001;
+                
+                        setTimeout(() => {
+                            let skipButton = document.querySelector("button.ytp-skip-ad-button");
+                            if (skipButton) {
+                                skipButton.click();
+                            }
+                        }, 100);
+                    }
                 }
-            }
             };
   
             const hideMainAds = () => {
