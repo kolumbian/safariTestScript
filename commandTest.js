@@ -291,8 +291,8 @@
             creatingFillingStyles(window.location.hostname);
             
             checkURL(() => { createBlockAdlock() });
-            remAdPl();
-            fetchPolyfill();
+            //remAdPl();
+            //fetchPolyfill();
             removeAdsWindow();
             hideMainAds();
 
@@ -300,8 +300,8 @@
                 checkURL(() => { 
                     createBlockAdlock() 
                 });
-                remAdPl();
-                fetchPolyfill();
+                //remAdPl();
+                //fetchPolyfill();
                 removeAdsWindow();
                 hideMainAds();
             });
