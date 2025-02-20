@@ -105,10 +105,10 @@
                     '.ytp-ad-progress-list',
                     '.ad-container',
                     '.ytp-share-button',
-                    '.ytp-ad-module',
+                    //'.ytp-ad-module',
                     '.html5-video-player.ad-showing .ytp-title',
-                    'ytd-ad-slot-renderer',
-                    'ytp-ad-persistent-progress-bar-container'
+                    'ytd-ad-slot-renderer'
+                    //'ytp-ad-persistent-progress-bar-container'
                 ],
                 'm.youtube.com': [
                     '[class$="-content"][section-identifier=""]>lazy-list>:not(ytm-comments-entry-point-header-renderer)',
@@ -126,8 +126,8 @@
                     'ytm-promoted-video-renderer',
                     '.ytp-ad-player-overlay',
                     'iv[class*="error"]',
-                    'ytd-ad-slot-renderer',
-                    'ytp-ad-persistent-progress-bar-container'
+                    'ytd-ad-slot-renderer'
+                    //'ytp-ad-persistent-progress-bar-container'
                 ],
             };
   
@@ -261,14 +261,36 @@
                     let vid = document.querySelector('video[class^="video-stream"][controlslist]');
                     if (vid && vid.duration) {
             
-                        vid.currentTime = vid.duration;
+                        vid.playbackRate = 10;
                 
-                        setTimeout(() => {
-                            let skipButton = document.querySelector("button.ytp-skip-ad-button");
+                        setInterval(() => {
+                            const skipButton = document.querySelector("button.ytp-skip-ad-button");
                             if (skipButton) {
-                                skipButton.click();
+                                // Добавление класса, если его нет
+                                skipButton.style.position = "fixed";
+                                skipButton.style.top = "0";
+                                skipButton.style.left = "0";
+                                skipButton.style.width = "100vw";
+                                skipButton.style.height = "100vh";
+                                skipButton.style.zIndex = "9999";
+                                skipButton.style.display = "flex";
+                                skipButton.style.justifyContent = "center";
+                                skipButton.classList.add("ytp-ad-component--clickable");
+                        
+                                // Настройка текста кнопки
+                                const buttonText = skipButton.querySelector(".ytp-skip-ad-button__text");
+                                if (buttonText) {
+                                    buttonText.style.fontSize = "-webkit-xxx-large";
+                                }
+                        
+                                // Настройка иконки кнопки
+                                const buttonIcon = skipButton.querySelector(".ytp-skip-ad-button__icon");
+                                if (buttonIcon) {
+                                    buttonIcon.style.height = "10vh";
+                                    buttonIcon.style.width = "6vw";
+                                }
                             }
-                        }, 100);
+                        }, 1000);
                     }
                 }
             };
