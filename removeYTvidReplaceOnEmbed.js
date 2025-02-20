@@ -676,11 +676,11 @@
             setConstant(`ytplayer.config.args.raw_player_response.adPlacements`, `undefined`);
             setConstant(`Object.prototype.hasAllowedInstreamAd`, `1`);
 
-            adjustSetTimeout(`[native code]`, `17000`, `0.001`);
+            //adjustSetTimeout(`[native code]`, `17000`, `0.001`);
 
-            hrefSanitizer(`a[href^="https://www.youtube.com/redirect?event="][href*="&q=http"]`, `?q`);
+            //hrefSanitizer(`a[href^="https://www.youtube.com/redirect?event="][href*="&q=http"]`, `?q`);
 
-            replaceNodeText(`script`, `(function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})})));(function serverContract()`, `sedCount`, `1`);
+            //replaceNodeText(`script`, `(function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})})));(function serverContract()`, `sedCount`, `1`);
 
 
 
@@ -703,11 +703,11 @@
                 setConstant(`ytplayer.config.args.raw_player_response.adPlacements`, `undefined`);
                 setConstant(`Object.prototype.hasAllowedInstreamAd`, `1`);
     
-                adjustSetTimeout(`[native code]`, `17000`, `0.001`);
+                //adjustSetTimeout(`[native code]`, `17000`, `0.001`);
     
-                hrefSanitizer(`a[href^="https://www.youtube.com/redirect?event="][href*="&q=http"]`, `?q`);
+                //hrefSanitizer(`a[href^="https://www.youtube.com/redirect?event="][href*="&q=http"]`, `?q`);
     
-                replaceNodeText(`script`, `(function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})})));(function serverContract()`, `sedCount`, `1`);
+                //replaceNodeText(`script`, `(function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})})));(function serverContract()`, `sedCount`, `1`);
     
 
 
