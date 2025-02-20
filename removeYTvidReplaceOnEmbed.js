@@ -472,7 +472,7 @@
                     if (typeof s !== 'string') {
                         s = String(s);
                     }
-                    return s.replace(/[.*+?^${}()|[\]\\]/g, '\$&');
+                    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 };
             
                 const patternToRegex = (pattern, flags = undefined, verbatim = false) => {
@@ -594,7 +594,7 @@
             
                 const patternToRegex = (pattern, flags = '', isGlob = false) => {
                     if (isGlob) {
-                        pattern = pattern.replace(/([.+^$(){}|[\]\/])/g, '\\$1').replace(/\*/g, '.*').replace(/\?/g, '.');
+                        pattern = pattern.replace(/([.+^$(){}|[\]\\/])/g, '\\$1').replace(/\*/g, '.*').replace(/\?/g, '.');
                     }
                     return new RegExp(pattern, flags);
                 };
