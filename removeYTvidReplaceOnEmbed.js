@@ -210,420 +210,50 @@
                 document.head.appendChild(style);
             };
   
+            // const remAdPl = () => {
+            //     var ytInitialPlayerResponse = null;
 
-            // scriptlets
-            const hrefSanitizer = (selec, sourc) => {
-                let selector = selec,
-                    source = sourc;
+            //     function getter() {
+            //         return ytInitialPlayerResponse;
+            //     }
             
-                if (typeof selector !== 'string') { return; }
-                if (selector === '') { return; }
+            //     function setter(data) {
+            //         ytInitialPlayerResponse = { ...data, adPlacements: [] };
+            //     }
             
-                const onIdle = (fn, options) => {
-                    if (globalThis.requestIdleCallback) {
-                        return globalThis.requestIdleCallback(fn, options);
-                    }
-                    return globalThis.requestAnimationFrame(fn);
-                };
-            
-                const runAt = (fn, when) => {
-                    if (when === 'interactive') {
-                        if (document.readyState === 'loading') {
-                            document.addEventListener('DOMContentLoaded', fn, { once: true });
-                        } else {
-                            fn();
-                        }
-                    } else {
-                        fn();
-                    }
-                };
-            
-                const sanitizeCopycats = (href, text) => {
-                    let elems = [];
-                    try {
-                        elems = document.querySelectorAll(`a[href="${href}"`);
-                    } catch (ex) { }
-                    for (const elem of elems) {
-                        elem.setAttribute('href', text);
-                    }
-                    return elems.length;
-                };
-            
-                const validateURL = text => {
-                    if (text === '') { return ''; }
-                    if (/[\x00-\x20\x7f]/.test(text)) { return ''; }
-                    try {
-                        const url = new URL(text, document.location);
-                        return url.href;
-                    } catch (ex) { }
-                    return '';
-                };
-            
-                const extractParam = (href, source) => {
-                    if (Boolean(source) === false) { return href; }
-                    const recursive = source.includes('?', 1);
-                    const end = recursive ? source.indexOf('?', 1) : source.length;
-                    try {
-                        const url = new URL(href, document.location);
-                        let value = url.searchParams.get(source.slice(1, end));
-                        if (value === null) { return href; }
-                        if (recursive) { return extractParam(value, source.slice(end)); }
-                        if (value.includes(' ')) {
-                            value = value.replace(/ /g, '%20');
-                        }
-                        return value;
-                    } catch (x) { }
-                    return href;
-                };
-            
-                const extractText = (elem, source) => {
-                    if (/^\[.*\]$/.test(source)) {
-                        return elem.getAttribute(source.slice(1, -1).trim()) || '';
-                    }
-                    if (source.startsWith('?')) {
-                        return extractParam(elem.href, source);
-                    }
-                    if (source === 'text') {
-                        return elem.textContent
-                            .replace(/^[^\x21-\x7e]+/, '') 
-                            .replace(/[^\x21-\x7e]+$/, ''); 
-                    }
-                    return '';
-                };
-            
-                const sanitize = () => {
-                    let elems = [];
-                    try {
-                        elems = document.querySelectorAll(selector);
-                    } catch (ex) {
-                        return false;
-                    }
-                    for (const elem of elems) {
-                        if (elem.localName !== 'a') { continue; }
-                        if (elem.hasAttribute('href') === false) { continue; }
-                        const href = elem.getAttribute('href');
-                        const text = extractText(elem, source);
-                        const hrefAfter = validateURL(text);
-                        if (hrefAfter === '') { continue; }
-                        if (hrefAfter === href) { continue; }
-                        elem.setAttribute('href', hrefAfter);
-                        sanitizeCopycats(href, hrefAfter);
-                    }
-                    return true;
-                };
-            
-                let observer, timer;
-            
-                const onDomChanged = mutations => {
-                    if (timer !== undefined) { return; }
-                    let shouldSanitize = false;
-                    for (const mutation of mutations) {
-                        if (mutation.addedNodes.length === 0) { continue; }
-                        for (const node of mutation.addedNodes) {
-                            if (node.nodeType !== 1) { continue; }
-                            shouldSanitize = true;
-                            break;
-                        }
-                        if (shouldSanitize) { break; }
-                    }
-                    if (shouldSanitize === false) { return; }
-                    timer = onIdle(() => {
-                        timer = undefined;
-                        sanitize();
-                    });
-                };
-            
-                const start = () => {
-                    if (sanitize() === false) { return; }
-                    observer = new MutationObserver(onDomChanged);
-                    observer.observe(document.body, {
-                        subtree: true,
-                        childList: true,
-                    });
-                };
-            
-                runAt(() => { start(); }, 'interactive');
-            };
+            //     if (window.ytInitialPlayerResponse) {
+            //         Object.defineProperty(window.ytInitialPlayerResponse, 'adPlacements', {
+            //             get: () => [],
+            //             set: (a) => undefined,
+            //             configurable: true
+            //         });
+            //     } else {
+            //         Object.defineProperty(window, 'ytInitialPlayerResponse', {
+            //             get: getter,
+            //             set: setter,
+            //             configurable: true
+            //         });
+            //     }
+            // }
 
-            const setConstant = (chn, constVal) => {
-                const chain = chn;
-                let constantValue = constVal,
-                    thisScript = document.currentScript,
-                    aborted = false;
-                if ( constantValue === 'undefined' ) {
-                    constantValue = undefined;
-                } else if ( constantValue === 'false' ) {
-                    constantValue = false;
-                } else if ( constantValue === 'true' ) {
-                    constantValue = true;
-                } else if ( constantValue === 'null' ) {
-                    constantValue = null;
-                }else if ( constantValue === 'noopFunc' ) {
-                    constantValue = function(){};
-                } else if ( constantValue === 'trueFunc' ) {
-                    constantValue = function(){ return true; };
-                } else if ( constantValue === 'falseFunc' ) {
-                    constantValue = function(){ return false; };
-                } else if ( /^\d+$/.test(constantValue) ) {
-                    constantValue = parseFloat(constantValue);
-                    if ( isNaN(constantValue) ) { return; }
-                    if ( Math.abs(constantValue) > 0x7FFF ) { return; }
-                } else if ( constantValue === "''" ) {
-                    constantValue = '';
-                } else {
-                    return;
-                }
-                const mustInterrupt = function(v) {
-                    if ( aborted ) { return true; }
-                    aborted = (v !== undefined && v !== null) && (constantValue !== undefined && constantValue !== null) && (typeof v !== typeof constantValue);
-                    return aborted;
-                };
-                const trapProps = function(owner, prop, configurable, handler) {
-                    if ( handler.init(owner[prop]) === false ) { return; }
-                    const ods = Object.getOwnPropertyDescriptor(owner, prop);
-                    let prevGetter, 
-                        prevSetter;
-                    if ( ods instanceof Object ) {
-                        if ( ods.configurable === false ) { return; }
-                        if ( ods.get instanceof Function ) {
-                            prevGetter = ods.get;
-                        }
-                        if ( ods.set instanceof Function ) {
-                            prevSetter = ods.set;
-                        }
-                    }
-                    try {
-                        Object.defineProperty(owner, prop, {
-                            configurable,
-                            get() {
-                                if ( prevGetter !== undefined ) {
-                                    prevGetter();
-                                }
-                                return handler.getter(); 
-                            },
-                            set(a) {
-                                if ( prevSetter !== undefined ) {
-                                    prevSetter(a);
-                                }
-                                handler.setter(a);
-                            },
-                            enumerable: true,
-                            configurable: true
-                        });
-                    } catch(ex) {
-                    }
-                };
-                const makeProxy = function(owner, chain) {
-                    const pos = chain.indexOf('.');
-                    if ( pos === -1 ) {
-                        trapProps(owner, chain, false, {
-                            v: undefined,
-                            init: function(v) {
-                                if ( mustInterrupt(v) ) { return false; }
-                                this.v = v;
-                                return true;
-                            },
-                            getter: function() {
-                                return document.currentScript === thisScript
-                                    ? this.v
-                                    : constantValue;
-                            },
-                            setter: function(a) {
-                                if ( mustInterrupt(a) === false ) { return; }
-                                constantValue = a;
-                            }
-                        });
-                        return;
-                    }
-                    const prop = chain.slice(0, pos),
-                        v = owner[prop];
-                    chain = chain.slice(pos + 1);
-                    if (  v instanceof Object || typeof v === 'object' && v !== null ) {
-                        makeProxy(v, chain);
-                        return;
-                    }
-                    trapProps(owner, prop, true, {
-                        v: undefined,
-                        init: function(v) {
-                            this.v = v;
-                            return true;
-                        },
-                        getter: function() {
-                            return this.v;
-                        },
-                        setter: function(a) {
-                            this.v = a;
-                            if ( a instanceof Object ) {
-                                makeProxy(a, chain);
-                            }
-                        }
-                    });
-                };
-                makeProxy(window, chain);
-            };
-
-            const replaceNodeText = (nodeN, prtn, repl, extArgOne, extArgTwo) => {
-                var nodeName = nodeN,
-                    pattern = prtn,
-                    replacement = repl,
-                    extraArgOne = extArgOne,
-                    extraArgTwo = extArgTwo;
-                const escapeRegexChars = (s) => {
-                    if (typeof s !== 'string') {
-                        s = String(s);
-                    }
-                    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                };
+            // const fetchPolyfill = () => {
+            //     const {fetch: origFetch} = window;
+            //     window.fetch = async (...args) => {
+            //         const response = await origFetch(...args);
             
-                const patternToRegex = (pattern, flags = undefined, verbatim = false) => {
-                    if (pattern === '') { return /^/; }
-                    const match = /^\/(.+)\/([gimsu]*)$/.exec(pattern);
-                    if (match === null) {
-                        const reStr = escapeRegexChars(pattern);
-                        return new RegExp(verbatim ? `^${reStr}$` : reStr, flags);
-                    }
-                    try {
-                        return new RegExp(match[1], match[2] || undefined);
-                    } catch (ex) {
-                    }
-                    return /^/;
-                };
+            //         if (response.url.includes('/youtubei/v1/player')) {
+            //             const text = () =>
+            //             response
+            //             .clone()
+            //             .text()
+            //             .then((data) => data.replace(/adPlacements/, 'odPlacement'));
             
-                const reNodeName = patternToRegex(nodeName, 'i', true);
-                const rePattern = patternToRegex(pattern, 'gms');
-                const extraArgs = [extraArgOne, extraArgTwo];
-                const reIncludes = extraArgs.includes || extraArgs.condition
-                    ? patternToRegex(extraArgs.includes || extraArgs.condition, 'ms')
-                    : null;
-                const reExcludes = extraArgs.excludes
-                    ? patternToRegex(extraArgs.excludes, 'ms')
-                    : null;
-                const stop = (takeRecord = true) => {
-                    if (takeRecord) {
-                        handleMutations(observer.takeRecords());
-                    }
-                    observer.disconnect();
-                };
-                const textContentFactory = (() => {
-                    const out = { createScript: s => s };
-                    const { trustedTypes: tt } = globalThis;
-                    if (tt instanceof Object) {
-                        if (typeof tt.getPropertyType === 'function') {
-                            if (tt.getPropertyType('script', 'textContent') === 'TrustedScript') {
-                                return tt.createPolicy(Math.random().toString(36).slice(2), out);
-                            }
-                        }
-                    }
-                    return out;
-                })();
-                let sedCount = extraArgs.sedCount || 0;
-                const handleNode = node => {
-                    const before = node.textContent;
-                    if (reIncludes) {
-                        reIncludes.lastIndex = 0;
-                        if (!reIncludes.test(before)) { return true; }
-                    }
-                    if (reExcludes) {
-                        reExcludes.lastIndex = 0;
-                        if (reExcludes.test(before)) { return true; }
-                    }
-                    rePattern.lastIndex = 0;
-                    if (!rePattern.test(before)) { return true; }
-                    rePattern.lastIndex = 0;
-                    const after = pattern !== ''
-                        ? before.replace(rePattern, replacement)
-                        : replacement;
-                    node.textContent = node.nodeName === 'SCRIPT'
-                        ? textContentFactory.createScript(after)
-                        : after;
-                    return sedCount === 0 || (sedCount -= 1) !== 0;
-                };
-                const handleMutations = mutations => {
-                    for (const mutation of mutations) {
-                        for (const node of mutation.addedNodes) {
-                            if (!reNodeName.test(node.nodeName)) { continue; }
-                            if (handleNode(node)) { continue; }
-                            stop(false); return;
-                        }
-                    }
-                };
-                const observer = new MutationObserver(handleMutations);
-                observer.observe(document, { childList: true, subtree: true });
-                if (document.documentElement) {
-                    const treeWalker = document.createTreeWalker(
-                        document.documentElement,
-                        NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT
-                    );
-                    for (;;) {
-                        const node = treeWalker.nextNode();
-                        if (node === null) { break; }
-                        if (!reNodeName.test(node.nodeName)) { continue; }
-                        if (node === document.currentScript) { continue; }
-                        if (handleNode(node)) { continue; }
-                        stop(); break;
-                    }
-                }
-                if (extraArgs.stay) { return; }
-                const runAt = (fn, when) => {
-                    if (when === 'interactive') {
-                        if (document.readyState === 'loading') {
-                            document.addEventListener('DOMContentLoaded', fn, { once: true });
-                        } else {
-                            fn();
-                        }
-                    } else {
-                        fn();
-                    }
-                };
-                runAt(() => {
-                    const quitAfter = extraArgs.quitAfter || 0;
-                    if (quitAfter !== 0) {
-                        setTimeout(() => { stop(); }, quitAfter);
-                    } else {
-                        stop();
-                    }
-                }, 'interactive');
-            };
-
-            const adjustSetTimeout = (needleA, delayA, boostA) => {
-                var needleArg = needleA,
-                    delayArg = delayA,
-                    boostArg = boostA;
-            
-                if (typeof needleArg !== 'string') { return; }
-            
-                const patternToRegex = (pattern, flags = '', isGlob = false) => {
-                    if (isGlob) {
-                        pattern = pattern.replace(/([.+^$(){}|[\]\\/])/g, '\\$1').replace(/\*/g, '.*').replace(/\?/g, '.');
-                    }
-                    return new RegExp(pattern, flags);
-                };
-            
-                const reNeedle = patternToRegex(needleArg);
-            
-                let delay = delayArg !== '*' ? parseInt(delayArg, 10) : -1;
-                if (isNaN(delay) || isFinite(delay) === false) { delay = 1000; }
-            
-                let boost = parseFloat(boostArg);
-                boost = isNaN(boost) === false && isFinite(boost)
-                    ? Math.min(Math.max(boost, 0.001), 50)
-                    : 0.05;
-            
-                self.setTimeout = new Proxy(self.setTimeout, {
-                    apply: function(target, thisArg, args) {
-                        const [a, b] = args;
-                        if (
-                            (delay === -1 || b === delay) &&
-                            reNeedle.test(a.toString())
-                        ) {
-                            args[1] = b * boost;
-                        }
-                        return target.apply(thisArg, args);
-                    }
-                });
-            };
-
-
+            //             response.text = text;
+            //             return response;
+            //         }
+            //         return response;
+            //     };
+            // }
   
             const removeAdsWindow = () => {
                 if (document.querySelector('.ad-showing')) {
@@ -631,14 +261,36 @@
                     let vid = document.querySelector('video[class^="video-stream"][controlslist]');
                     if (vid && vid.duration) {
             
-                        vid.currentTime = vid.duration - 0.001;
+                        vid.playbackRate = 10;
                 
-                        setTimeout(() => {
-                            let skipButton = document.querySelector("button.ytp-skip-ad-button");
+                        setInterval(() => {
+                            const skipButton = document.querySelector("button.ytp-skip-ad-button");
                             if (skipButton) {
-                                skipButton.click();
+                                // Добавление класса, если его нет
+                                skipButton.style.position = "fixed";
+                                skipButton.style.top = "0";
+                                skipButton.style.left = "0";
+                                skipButton.style.width = "100vw";
+                                skipButton.style.height = "100vh";
+                                skipButton.style.zIndex = "9999";
+                                skipButton.style.display = "flex";
+                                skipButton.style.justifyContent = "center";
+                                skipButton.classList.add("ytp-ad-component--clickable");
+                        
+                                // Настройка текста кнопки
+                                const buttonText = skipButton.querySelector(".ytp-skip-ad-button__text");
+                                if (buttonText) {
+                                    buttonText.style.fontSize = "-webkit-xxx-large";
+                                }
+                        
+                                // Настройка иконки кнопки
+                                const buttonIcon = skipButton.querySelector(".ytp-skip-ad-button__icon");
+                                if (buttonIcon) {
+                                    buttonIcon.style.height = "10vh";
+                                    buttonIcon.style.width = "6vw";
+                                }
                             }
-                        }, 100);
+                        }, 1000);
                     }
                 }
             };
@@ -663,56 +315,18 @@
             creatingFillingStyles(window.location.hostname);
             
             checkURL(() => { createBlockAdlock() });
-
-            //scriptlets
-            setConstant(`ytInitialPlayerResponse.playerAds`, `undefined`);
-            setConstant(`ytInitialPlayerResponse.adPlacements`, `undefined`);
-            setConstant(`ytInitialPlayerResponse.adSlots`, `undefined`);
-            setConstant(`playerResponse.adPlacements`, `undefined`);
-            setConstant(`yt.config_.EXPERIMENT_FLAGS.web_bind_fetch`, `false`);
-            setConstant(`google_ad_status`, `1`);
-            setConstant(`yt.config_.openPopupConfig.supportedPopups.adBlockMessageViewModel`, `false`);
-            setConstant(`Object.prototype.adBlocksFound`, `0`);
-            setConstant(`ytplayer.config.args.raw_player_response.adPlacements`, `undefined`);
-            setConstant(`Object.prototype.hasAllowedInstreamAd`, `1`);
-
-            //adjustSetTimeout(`[native code]`, `17000`, `0.001`);
-
-            //hrefSanitizer(`a[href^="https://www.youtube.com/redirect?event="][href*="&q=http"]`, `?q`);
-
-            //replaceNodeText(`script`, `(function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})})));(function serverContract()`, `sedCount`, `1`);
-
-
-
-            //removeAdsWindow();
+            //remAdPl();
+            //fetchPolyfill();
+            removeAdsWindow();
             hideMainAds();
 
             MutObserve(() => {
                 checkURL(() => { 
                     createBlockAdlock() 
                 });
-                //scriptlets
-                setConstant(`ytInitialPlayerResponse.playerAds`, `undefined`);
-                setConstant(`ytInitialPlayerResponse.adPlacements`, `undefined`);
-                setConstant(`ytInitialPlayerResponse.adSlots`, `undefined`);
-                setConstant(`playerResponse.adPlacements`, `undefined`);
-                setConstant(`yt.config_.EXPERIMENT_FLAGS.web_bind_fetch`, `false`);
-                setConstant(`google_ad_status`, `1`);
-                setConstant(`yt.config_.openPopupConfig.supportedPopups.adBlockMessageViewModel`, `false`);
-                setConstant(`Object.prototype.adBlocksFound`, `0`);
-                setConstant(`ytplayer.config.args.raw_player_response.adPlacements`, `undefined`);
-                setConstant(`Object.prototype.hasAllowedInstreamAd`, `1`);
-    
-                //adjustSetTimeout(`[native code]`, `17000`, `0.001`);
-    
-                //hrefSanitizer(`a[href^="https://www.youtube.com/redirect?event="][href*="&q=http"]`, `?q`);
-    
-                //replaceNodeText(`script`, `(function serverContract(), /*START*/"YOUTUBE_PREMIUM_LOGO"!==ytInitialData?.topbar?.desktopTopbarRenderer?.logo?.topbarLogoRenderer?.iconImage?.iconType&&(location.href.startsWith("https://www.youtube.com/tv#/")||location.href.startsWith("https://www.youtube.com/embed/")||document.addEventListener("DOMContentLoaded",(function(){const t=()=>{const t=document.getElementById("movie_player");if(!t)return;if(!t.getStatsForNerds?.()?.debug_info?.startsWith?.("SSAP, AD"))return;const e=t.getProgressState?.();e&&e.duration>0&&(e.loaded<e.duration||e.duration-e.current>1)&&t.seekTo?.(e.duration)};t(),new MutationObserver((()=>{t()})).observe(document,{childList:!0,subtree:!0})})));(function serverContract()`, `sedCount`, `1`);
-    
-
-
-
-                //removeAdsWindow();
+                //remAdPl();
+                //fetchPolyfill();
+                removeAdsWindow();
                 hideMainAds();
             });
         };
