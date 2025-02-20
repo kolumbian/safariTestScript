@@ -105,10 +105,10 @@
                     '.ytp-ad-progress-list',
                     '.ad-container',
                     '.ytp-share-button',
-                    '.ytp-ad-module',
+                    //'.ytp-ad-module',
                     '.html5-video-player.ad-showing .ytp-title',
-                    'ytd-ad-slot-renderer',
-                    'ytp-ad-persistent-progress-bar-container'
+                    'ytd-ad-slot-renderer'
+                    //'ytp-ad-persistent-progress-bar-container'
                 ],
                 'm.youtube.com': [
                     '[class$="-content"][section-identifier=""]>lazy-list>:not(ytm-comments-entry-point-header-renderer)',
@@ -126,8 +126,8 @@
                     'ytm-promoted-video-renderer',
                     '.ytp-ad-player-overlay',
                     'iv[class*="error"]',
-                    'ytd-ad-slot-renderer',
-                    'ytp-ad-persistent-progress-bar-container'
+                    'ytd-ad-slot-renderer'
+                    //'ytp-ad-persistent-progress-bar-container'
                 ],
             };
   
