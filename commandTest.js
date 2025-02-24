@@ -97,6 +97,7 @@
                     '.ytd-video-masthead-ad-v3-renderer',
                     '.ytp-ad-action-interstitial-background-container',
                     '.ytp-ad-action-interstitial-slot',
+                    '.ytp-ad-timed-pie-countdown-container',
                     '.ytp-ad-button',
                     '.ytp-ad-image-overlay',
                     '.ytp-ad-overlay-container',
@@ -114,7 +115,9 @@
                     '[class$="-content"][section-identifier=""]>lazy-list>:not(ytm-comments-entry-point-header-renderer)',
                     '[class*="Google"]',
                     '.companion-ad-container',
-                    '.ytp-ad-action-interstitial',
+                    '.ytp-ad-action-interstitial-background-container',
+                    '.ytp-ad-action-interstitial-slot',
+                    '.ytp-ad-timed-pie-countdown-container',
                     '.ytp-cued-thumbnail-overlay > div[style*="/sddefault.jpg"]',
                     `a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||window.event,'"]:not([role]):not([class]):not([id])`,
                     `a[href^="/watch?v="][onclick^="return koya.onEvent(arguments[0]||window.event,'"]:not([role]):not([class]):not([id]) + div`,
@@ -261,7 +264,7 @@
                     let vid = document.querySelector('video[class^="video-stream"][controlslist]');
                     if (vid && vid.duration) {
             
-                        vid.playbackRate = 10;
+                        vid.currentTime = vid.duration - 0.01;
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
