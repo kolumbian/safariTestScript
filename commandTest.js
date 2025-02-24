@@ -259,11 +259,12 @@
             // }
   
             const removeAdsWindow = () => {
+
                 if (document.querySelector('.ad-showing')) {
-                
+
+                    let vid = document.querySelector('video');
                     if (vid && vid.duration) {
-                        
-                        let vid = document.querySelector('video[class^="video-stream"][controlslist]');
+
                         vid.currentTime = vid.duration - 0.01;
                 
                         setInterval(() => {
