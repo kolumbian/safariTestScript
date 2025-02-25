@@ -220,7 +220,6 @@
                     let vid = document.querySelector('video');
                     if (vid && vid.duration) {
 
-                        vid.currentTime = vid.duration - 6;
                         vid.playbackRate = 10;
                         vid.muted = true;
                 
