@@ -213,51 +213,6 @@
                 document.head.appendChild(style);
             };
   
-            // const remAdPl = () => {
-            //     var ytInitialPlayerResponse = null;
-
-            //     function getter() {
-            //         return ytInitialPlayerResponse;
-            //     }
-            
-            //     function setter(data) {
-            //         ytInitialPlayerResponse = { ...data, adPlacements: [] };
-            //     }
-            
-            //     if (window.ytInitialPlayerResponse) {
-            //         Object.defineProperty(window.ytInitialPlayerResponse, 'adPlacements', {
-            //             get: () => [],
-            //             set: (a) => undefined,
-            //             configurable: true
-            //         });
-            //     } else {
-            //         Object.defineProperty(window, 'ytInitialPlayerResponse', {
-            //             get: getter,
-            //             set: setter,
-            //             configurable: true
-            //         });
-            //     }
-            // }
-
-            // const fetchPolyfill = () => {
-            //     const {fetch: origFetch} = window;
-            //     window.fetch = async (...args) => {
-            //         const response = await origFetch(...args);
-            
-            //         if (response.url.includes('/youtubei/v1/player')) {
-            //             const text = () =>
-            //             response
-            //             .clone()
-            //             .text()
-            //             .then((data) => data.replace(/adPlacements/, 'odPlacement'));
-            
-            //             response.text = text;
-            //             return response;
-            //         }
-            //         return response;
-            //     };
-            // }
-  
             const removeAdsWindow = () => {
 
                 if (document.querySelector('.ad-showing')) {
@@ -265,12 +220,13 @@
                     let vid = document.querySelector('video');
                     if (vid && vid.duration) {
 
-                        vid.currentTime = vid.duration - 0.01;
+                        vid.currentTime = vid.duration - 6;
+                        vid.playbackRate = 10;
+                        vid.muted = true;
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
                             if (skipButton) {
-                                // Добавление класса, если его нет
                                 skipButton.style.position = "fixed";
                                 skipButton.style.top = "0";
                                 skipButton.style.left = "0";
@@ -281,13 +237,11 @@
                                 skipButton.style.justifyContent = "center";
                                 skipButton.classList.add("ytp-ad-component--clickable");
                         
-                                // Настройка текста кнопки
                                 const buttonText = skipButton.querySelector(".ytp-skip-ad-button__text");
                                 if (buttonText) {
                                     buttonText.style.fontSize = "-webkit-xxx-large";
                                 }
                         
-                                // Настройка иконки кнопки
                                 const buttonIcon = skipButton.querySelector(".ytp-skip-ad-button__icon");
                                 if (buttonIcon) {
                                     buttonIcon.style.height = "10vh";
@@ -295,6 +249,12 @@
                                 }
                             }
                         }, 1000);
+                    }
+                } else {
+                    let vid = document.querySelector('video');
+                    if (vid && vid.duration) {
+
+                        vid.muted = false;
                     }
                 }
             };
@@ -319,8 +279,6 @@
             creatingFillingStyles(window.location.hostname);
             
             checkURL(() => { createBlockAdlock() });
-            //remAdPl();
-            //fetchPolyfill();
             removeAdsWindow();
             hideMainAds();
 
@@ -328,8 +286,6 @@
                 checkURL(() => { 
                     createBlockAdlock() 
                 });
-                //remAdPl();
-                //fetchPolyfill();
                 removeAdsWindow();
                 hideMainAds();
             });
