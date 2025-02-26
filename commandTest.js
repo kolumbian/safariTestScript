@@ -217,7 +217,7 @@
 
                 if (document.querySelector('.ad-showing')) {
 
-                    let vid = document.querySelector('video');
+                    let vid = document.querySelector('video[class^="video-stream"][controlslist]');
                     if (vid && vid.duration) {
 
                         vid.playbackRate = 10;
