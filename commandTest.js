@@ -255,6 +255,7 @@
                     if (vid && vid.duration) {
 
                         vid.muted = false;
+                        vid.style.display = 'unset';
                     }
                 }
             };
