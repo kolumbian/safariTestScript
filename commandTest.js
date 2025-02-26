@@ -220,7 +220,7 @@
                     let vid = document.querySelector('video[class^="video-stream"][controlslist]');
                     if (vid && vid.duration) {
 
-                        vid.playbackRate = 5;
+                        vid.playbackRate = 2;
                         // vid.muted = true;
                 
                         setInterval(() => {
