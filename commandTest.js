@@ -221,7 +221,6 @@
                     if (vid && vid.duration) {
 
                         vid.playbackRate = 10;
-                        vid.muted = true;
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
@@ -249,13 +248,6 @@
                             }
                         }, 1000);
                     }
-                } else {
-                    let vid = document.querySelector('video');
-                    if (vid && vid.duration) {
-
-                        vid.muted = false;
-                    }
-                }
             };
   
             const hideMainAds = () => {
