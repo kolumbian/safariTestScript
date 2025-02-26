@@ -222,6 +222,7 @@
 
                         vid.playbackRate = 2;
                         vid.muted = true;
+                        vid.style.display = none;
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
