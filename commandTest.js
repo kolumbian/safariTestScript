@@ -274,12 +274,12 @@
                                     const mobButtonText = mobSkipButton.querySelector(".ytp-ad-skip-button-text");
                                     if (mobButtonText) {
                                         mobButtonText.style.fontSize = "-webkit-xxx-large";
-                                        mobButtonText.style.paddingTop = "20%";
+                                        mobButtonText.style.paddingTop = "25%";
                                     }
     
                                     const mobButtonIcon = mobSkipButton.querySelector(".ytp-ad-skip-button-icon-modern");
                                     if (mobButtonIcon) {
-                                        mobButtonIcon.style.paddingTop = "20%";
+                                        mobButtonIcon.style.paddingTop = "25%";
     
                                         const mobButtonIconSVG = mobButtonIcon.querySelector("svg");
                                         mobButtonIconSVG.style.height = "8vh";
@@ -359,6 +359,7 @@
         }
     })();
 })();
+
 
 
 
