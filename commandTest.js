@@ -223,9 +223,7 @@
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
-                            const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
                             const mobAdOverlay = document.querySelector(".ytp-ad-player-overlay");
-                            const mobOverlayEls = mobAdOverlay.querySelector("[class*='ytd-ad-player-overlay-']:not([class*='skip'])");
                             if (skipButton) {
                                 skipButton.style.position = "fixed";
                                 skipButton.style.top = "0";
@@ -247,8 +245,10 @@
                                     buttonIcon.style.height = "10vh";
                                     buttonIcon.style.width = "6vw";
                                 }
-                            } else if (mobSkipButton) {
+                            } else if (mobAdOverlay) {
                                 mobAdOverlay.style.setProperty( "display", "block", "important" );
+                                const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
+                                const mobOverlayEls = mobAdOverlay.querySelector("[class*='ytd-ad-player-overlay-']:not([class*='skip'])");
                                 if (mobOverlayEls.length !== 0) {
                                     mobOverlayEls.forEach((el) => {
                                         el.style.setProperty( "display", "none", "important" );
@@ -280,6 +280,7 @@
                                     mobButtonIconSVG.style.width = "6vw";
                                     mobButtonIconSVG.style.paddingLeft = "10px";
                                 }
+                            } else {
                             }
                         }, 1000);
                     }
@@ -351,4 +352,5 @@
         }
     })();
 })();
+
 
