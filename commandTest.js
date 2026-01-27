@@ -223,6 +223,9 @@
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
+                            const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
+                            const mobAdOverlay = document.querySelector(".ytp-ad-player-overlay");
+                            const mobOverlayEls = mobAdOverlay.querySelector("[class*='ytd-ad-player-overlay-']:not([class*='skip'])");
                             if (skipButton) {
                                 skipButton.style.position = "fixed";
                                 skipButton.style.top = "0";
@@ -243,6 +246,39 @@
                                 if (buttonIcon) {
                                     buttonIcon.style.height = "10vh";
                                     buttonIcon.style.width = "6vw";
+                                }
+                            } else if (mobSkipButton) {
+                                mobAdOverlay.style.setProperty( "display", "block", "important" );
+                                if (mobOverlayEls.length !== 0) {
+                                    mobOverlayEls.forEach((el) => {
+                                        el.style.setProperty( "display", "none", "important" );
+                                    });
+                                }
+                                mobSkipButton.style.position = "fixed";
+                                mobSkipButton.style.top = "0";
+                                mobSkipButton.style.left = "0";
+                                mobSkipButton.style.width = "100vw";
+                                mobSkipButton.style.height = "100vh";
+                                mobSkipButton.style.zIndex = "9999";
+                                mobSkipButton.style.display = "flex";
+                                mobSkipButton.style.justifyContent = "center";
+                                mobSkipButton.style.background = "unset";
+                                mobSkipButton.classList.add("ytp-ad-component--clickable");
+
+                                const mobButtonText = mobSkipButton.querySelector(".ytp-ad-skip-button-text");
+                                if (mobButtonText) {
+                                    mobButtonText.style.fontSize = "-webkit-xxx-large";
+                                    mobButtonText.style.paddingTop = "20%";
+                                }
+
+                                const mobButtonIcon = mobSkipButton.querySelector(".ytp-ad-skip-button-icon-modern");
+                                if (mobButtonIcon) {
+                                    mobButtonIcon.style.paddingTop = "20%";
+
+                                    const mobButtonIconSVG = mobButtonIcon.querySelector("svg");
+                                    mobButtonIconSVG.style.height = "8vh";
+                                    mobButtonIconSVG.style.width = "6vw";
+                                    mobButtonIconSVG.style.paddingLeft = "10px";
                                 }
                             }
                         }, 1000);
@@ -315,3 +351,4 @@
         }
     })();
 })();
+
