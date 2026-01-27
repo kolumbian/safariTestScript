@@ -247,8 +247,6 @@
                                 }
                             } else if (mobAdOverlay) {
                                 mobAdOverlay.style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-skip-button-slot").style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-skip-button-container").style.setProperty( "display", "block", "important" );
                                 
                                 document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
                                 document.querySelector(".ytp-ad-player-overlay-top-bar-gradients").style.setProperty( "display", "none", "important" );
@@ -260,6 +258,9 @@
                                 const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
                                 
                                 if (mobSkipButton) {
+                                    document.querySelector(".ytp-ad-skip-button-slot").style.setProperty( "display", "block", "important" );
+                                    document.querySelector(".ytp-ad-skip-button-container").style.setProperty( "display", "block", "important" );
+                                    
                                     mobSkipButton.style.position = "fixed";
                                     mobSkipButton.style.top = "0";
                                     mobSkipButton.style.left = "0";
@@ -359,6 +360,7 @@
         }
     })();
 })();
+
 
 
 
