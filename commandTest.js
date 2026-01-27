@@ -248,7 +248,7 @@
                             } else if (mobAdOverlay) {
                                 mobAdOverlay.style.setProperty( "display", "block", "important" );
                                 const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
-                                const mobOverlayEls = mobAdOverlay.querySelector("[class*='ytd-ad-player-overlay-']:not([class*='skip'])");
+                                const mobOverlayEls = mobAdOverlay.querySelectorAll("[class*='ytd-ad-player-overlay-']:not([class*='skip'])");
                                 if (mobOverlayEls.length !== 0) {
                                     mobOverlayEls.forEach((el) => {
                                         el.style.setProperty( "display", "none", "important" );
@@ -352,5 +352,6 @@
         }
     })();
 })();
+
 
 
