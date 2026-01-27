@@ -247,12 +247,15 @@
                                 }
                             } else if (mobAdOverlay) {
                                 mobAdOverlay.style.setProperty( "display", "block", "important" );
+                                document.querySelector(".ytp-ad-skip-button-slot").style.setProperty( "display", "block", "important" );
+                                document.querySelector(".ytp-ad-skip-button-container").style.setProperty( "display", "block", "important" );
+                                
                                 document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
-                                document.querySelector(".ytp-ad-player-overlay-flyout-cta").style.setProperty( "display", "block", "important" );
+                                document.querySelector(".ytp-ad-player-overlay-top-bar-gradients").style.setProperty( "display", "none", "important" );
+                                document.querySelector(".ytp-ad-player-overlay-instream-info").style.setProperty( "display", "none", "important" );
+                                document.querySelector(".ytp-ad-player-overlay-progress-bar").style.setProperty( "display", "none", "important" );
+                                document.querySelector(".ytp-ad-player-overlay-instream-user-sentiment").style.setProperty( "display", "none", "important" );
+                                document.querySelector(".ytp-ad-player-overlay-ad-disclosure-banner").style.setProperty( "display", "none", "important" );
                                 
                                 const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
                                 
@@ -356,6 +359,7 @@
         }
     })();
 })();
+
 
 
 
