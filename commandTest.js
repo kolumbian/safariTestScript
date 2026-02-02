@@ -270,14 +270,14 @@
                                         document.querySelector('.ytp-ad-skip-button-slot').addEventListener('click', function (e) {
                                             console.log(">>> VID CURRENTTIME:", video.currentTime);
                                             console.log(">>> VID DURATION:", video.duration);
-                                            video.currentTime = video.duration;
+                                            video.currentTime = video.duration - 1;
                                             video.ended = true;
                                             console.log(">>> CLICKED SKIP BUTTON");
                                         });
                                     }
                                 }
                                 //
-                                
+
                                 const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
                                 
                                 if (mobSkipButton) {
