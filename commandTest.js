@@ -341,7 +341,7 @@
                 }
             };
 
-            // AdBlocker which removes the ad contents from the fetch requests itself !!
+            // Remove ads data
             (() => {
                 const _origFetch = window.fetch;
                 window.fetch = async function(input, init) {
@@ -447,28 +447,28 @@
             };
 
             /*YT ADS BLOCKER*/
-            const adsBlock = () => {
-                try{
-                    document.getElementsByClassName('video-stream')[0].removeAttribute('disablepictureinpicture');
-                } catch {}
+            // const adsBlock = () => {
+            //     try{
+            //         document.getElementsByClassName('video-stream')[0].removeAttribute('disablepictureinpicture');
+            //     } catch {}
 
-                /*Block Ads*/
-                var ads=document.getElementsByTagName("ad-slot-renderer");
-                for(var x in ads){
-                    try{ads[x].remove();}catch{}
-                }
-                try{
-                    document.getElementsByClassName("ad-interrupting")[0].getElementsByTagName("video")[0].currentTime=document.getElementsByClassName("ad-interrupting")[0].getElementsByTagName("video")[0].duration;
-                    document.getElementsByClassName("ytp-ad-skip-button-modern")[0].click();
-                } catch {}
-            }
+            //     /*Block Ads*/
+            //     var ads=document.getElementsByTagName("ad-slot-renderer");
+            //     for(var x in ads){
+            //         try{ads[x].remove();}catch{}
+            //     }
+            //     try{
+            //         document.getElementsByClassName("ad-interrupting")[0].getElementsByTagName("video")[0].currentTime=document.getElementsByClassName("ad-interrupting")[0].getElementsByTagName("video")[0].duration;
+            //         document.getElementsByClassName("ytp-ad-skip-button-modern")[0].click();
+            //     } catch {}
+            // }
         
             creatingFillingStyles(window.location.hostname);
             
             checkURL(() => { createBlockAdlock() });
             removeAdsWindow();
             hideMainAds();
-            adsBlock();
+            // adsBlock();
 
             MutObserve(() => {
                 checkURL(() => { 
@@ -476,7 +476,7 @@
                 });
                 removeAdsWindow();
                 hideMainAds();
-                adsBlock();
+                // adsBlock();
             });
         };
   
