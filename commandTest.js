@@ -265,7 +265,7 @@
                                     let video = document.querySelector("video");
                                     if (video && video.duration) {
                                         document.querySelector('.ytp-ad-skip-button-slot').addEventListener('click', function (e) {
-                                            onsole.log(">>> VID CURRENTTIME:", video.currentTime);
+                                            console.log(">>> VID CURRENTTIME:", video.currentTime);
                                             console.log(">>> VID DURATION:", video.duration);
                                             video.currentTime = video.duration;
                                             video.ended = true;
@@ -383,6 +383,7 @@
         }
     })();
 })();
+
 
 
 
