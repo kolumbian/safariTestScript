@@ -254,6 +254,13 @@
                                 document.querySelector(".ytp-ad-player-overlay-progress-bar").style.setProperty( "display", "none", "important" );
                                 document.querySelector(".ytp-ad-player-overlay-instream-user-sentiment").style.setProperty( "display", "none", "important" );
                                 document.querySelector(".ytp-ad-player-overlay-ad-disclosure-banner").style.setProperty( "display", "none", "important" );
+
+                                let adSkipSlot = document.querySelector("button.ytp-ad-skip-button-modern");
+
+                                if (!adSkipSlot) {
+                                    let skipPreview = document.querySelector(".ytp-ad-player-overlay-skip-or-preview");
+                                    skipPreview.innerHTML = '<div class="ytp-ad-skip-ad-slot" style="" id="skip-button:12"><div class="ytp-ad-skip-button-slot" style="display: block !important;" id="skip-button:13"><span class="ytp-ad-skip-button-container ytp-ad-skip-button-container-detached ytp-ad-skip-button-icon-mweb-delhi" style="display: block !important;"><button class="ytp-ad-skip-button-modern ytp-button ytp-ad-component--clickable" style="position: fixed; top: 0px; left: 0px; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; background: unset;"><div class="ytp-ad-text ytp-ad-skip-button-text-centered ytp-ad-skip-button-text" style="font-size: xxx-large; padding-top: 25%;" id="ad-text:14">Пропустити</div><span class="ytp-ad-skip-button-icon-modern" style="padding-top: 25%;"><svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true" focusable="false" style="height: 8vh; width: 6vw; padding-left: 10px;"><path d="M20 20C20.26 20 20.51 19.89 20.70 19.70C20.89 19.51 21 19.26 21 19V5C21 4.73 20.89 4.48 20.70 4.29C20.51 4.10 20.26 4 20 4C19.73 4 19.48 4.10 19.29 4.29C19.10 4.48 19 4.73 19 5V19C19 19.26 19.10 19.51 19.29 19.70C19.48 19.89 19.73 20 20 20ZM5.04 19.77L18 12L5.04 4.22C4.84 4.10 4.60 4.03 4.36 4.03C4.12 4.03 3.89 4.09 3.68 4.21C3.47 4.32 3.30 4.49 3.18 4.70C3.06 4.91 2.99 5.14 3 5.38V18.61C2.99 18.85 3.06 19.08 3.18 19.29C3.30 19.50 3.47 19.67 3.68 19.79C3.89 19.90 4.12 19.96 4.36 19.96C4.60 19.96 4.84 19.89 5.04 19.77Z" fill="white"></path></svg></span></button></span></div></div>';
+                                }
                                 
                                 const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
                                 
@@ -360,6 +367,7 @@
         }
     })();
 })();
+
 
 
 
