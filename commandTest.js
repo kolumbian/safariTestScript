@@ -152,47 +152,49 @@
                 const widths = [320, 375, 414];
                 const el = document.querySelector(["[logo-src].ytmusic-nav-bar", "ytm-home-logo", "ytd-logo"]);
         
-                if ( widths.includes(window.innerWidth) ) {
-        
-                    if ( document.querySelector('#app>[role="tablist"]') ) {
-                        topBtn = `${document.querySelector('#app>[role="tablist"]').clientHeight}px`;
+                if (el) {
+                    if ( widths.includes(window.innerWidth) ) {
+            
+                        if ( document.querySelector('#app>[role="tablist"]') ) {
+                            topBtn = `${document.querySelector('#app>[role="tablist"]').clientHeight}px`;
+                        }
                     }
-                }
-        
-                const create = `
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.2439 5.86475H8.06927L3 10.883V17.9815L8.06927 22.9998H15.24L20.3092 17.9815V10.883L15.2439 5.86475ZM18.9802 17.4266L14.695 21.6725H8.62991L4.34475 17.4266V11.4225L8.62991 7.18044H14.695L18.9802 11.4225V17.4266V17.4266Z" fill="#E50004"/>
-                    <path d="M14.6616 19L17.3091 16.5665V12.4434L14.6616 10.0099H12.4242V18.9868L14.6616 19ZM13.6472 11.1341H14.0573L16.0861 12.9989V15.9879L14.0573 17.8527H13.6472V11.1341ZM8.95656 10.0099L6.30908 12.4434V16.5533L7.52851 17.6741V14.7678H9.97095V18.9735H11.1904V10L8.95656 10.0099ZM9.98534 11.1341V13.6602H7.54289V13.0121L9.57167 11.1473L9.98534 11.1341Z" fill="#E50004"/>
-                    <path d="M6.6064 6.50378V5.74905C6.6064 4.12484 8.0147 2.50063 9.64114 2.50063H13.977C15.592 2.50063 17.0118 4.12484 17.0118 5.74905V6.50378L18.3091 8V5.74464C18.3129 3.37894 16.2464 1 13.977 1H9.64114C7.37178 1 5.30908 3.3657 5.30908 5.74464V8L6.6064 6.50378Z" fill="#E50004"/>
-                    </svg>                
-                `;
-        
-                const block = document.createElement('div');
-                
-                block.classList.add('info-start-adlock__content');
-                el.style.display = "flex";
-                    
-                el.append(block);
-        
-                if ( document.getElementsByClassName('info-start-adlock__content') ) {
-        
-                    block.innerHTML = create;
-        
-                    const styles = document.createElement('style');
-                    
-                    styles.innerHTML = `
-                    #primary { position: relative; }
-                    .info-start-adlock__content { 
-                        width: 100%; 
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding: 1%!important;
-                    }
-                    .info-start-adlock__content>svg { margin-left: 6%; }
+            
+                    const create = `
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.2439 5.86475H8.06927L3 10.883V17.9815L8.06927 22.9998H15.24L20.3092 17.9815V10.883L15.2439 5.86475ZM18.9802 17.4266L14.695 21.6725H8.62991L4.34475 17.4266V11.4225L8.62991 7.18044H14.695L18.9802 11.4225V17.4266V17.4266Z" fill="#E50004"/>
+                        <path d="M14.6616 19L17.3091 16.5665V12.4434L14.6616 10.0099H12.4242V18.9868L14.6616 19ZM13.6472 11.1341H14.0573L16.0861 12.9989V15.9879L14.0573 17.8527H13.6472V11.1341ZM8.95656 10.0099L6.30908 12.4434V16.5533L7.52851 17.6741V14.7678H9.97095V18.9735H11.1904V10L8.95656 10.0099ZM9.98534 11.1341V13.6602H7.54289V13.0121L9.57167 11.1473L9.98534 11.1341Z" fill="#E50004"/>
+                        <path d="M6.6064 6.50378V5.74905C6.6064 4.12484 8.0147 2.50063 9.64114 2.50063H13.977C15.592 2.50063 17.0118 4.12484 17.0118 5.74905V6.50378L18.3091 8V5.74464C18.3129 3.37894 16.2464 1 13.977 1H9.64114C7.37178 1 5.30908 3.3657 5.30908 5.74464V8L6.6064 6.50378Z" fill="#E50004"/>
+                        </svg>                
                     `;
-        
-                    document.head.append(styles);
+            
+                    const block = document.createElement('div');
+                    
+                    block.classList.add('info-start-adlock__content');
+                    el.style.display = "flex";
+                        
+                    el.append(block);
+            
+                    if ( document.getElementsByClassName('info-start-adlock__content') ) {
+            
+                        block.innerHTML = create;
+            
+                        const styles = document.createElement('style');
+                        
+                        styles.innerHTML = `
+                        #primary { position: relative; }
+                        .info-start-adlock__content { 
+                            width: 100%; 
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 1%!important;
+                        }
+                        .info-start-adlock__content>svg { margin-left: 6%; }
+                        `;
+            
+                        document.head.append(styles);
+                    }
                 }
             };
   
