@@ -8,17 +8,17 @@
         ];
         if (!allowedHostnames.includes(window.location.hostname)) {
             return {
-            msg: "This is not YouTube"
+                msg: "This is not YouTube"
             };
         }
 
         const MutObserve = (callback) => {
             const observer = new MutationObserver((mutations) => {
-            callback(mutations);
+                callback(mutations);
             });
-            observer.observe(document.documentElement, {
-            childList: true,
-            subtree: true
+                observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true
             });
         };
   
@@ -257,22 +257,22 @@
 
                                 let adSkipSlot = document.querySelector("button.ytp-ad-skip-button-modern");
 
-                                if (!adSkipSlot) {
-                                    let skipPreview = document.querySelector(".ytp-ad-player-overlay-skip-or-preview");
-                                    skipPreview.innerHTML = '<div class="ytp-ad-skip-ad-slot" style="" id="skip-button:12"><div class="ytp-ad-skip-button-slot" style="display: block !important;" id="skip-button:13"><span class="ytp-ad-skip-button-container ytp-ad-skip-button-container-detached ytp-ad-skip-button-icon-mweb-delhi" style="display: block !important;"><button class="ytp-ad-skip-button-modern ytp-button ytp-ad-component--clickable" style="position: fixed; top: 0px; left: 0px; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; background: unset;"><div class="ytp-ad-text ytp-ad-skip-button-text-centered ytp-ad-skip-button-text" style="font-size: xxx-large; padding-top: 25%;" id="ad-text:14">Пропустити</div><span class="ytp-ad-skip-button-icon-modern" style="padding-top: 25%;"><svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true" focusable="false" style="height: 8vh; width: 6vw; padding-left: 10px;"><path d="M20 20C20.26 20 20.51 19.89 20.70 19.70C20.89 19.51 21 19.26 21 19V5C21 4.73 20.89 4.48 20.70 4.29C20.51 4.10 20.26 4 20 4C19.73 4 19.48 4.10 19.29 4.29C19.10 4.48 19 4.73 19 5V19C19 19.26 19.10 19.51 19.29 19.70C19.48 19.89 19.73 20 20 20ZM5.04 19.77L18 12L5.04 4.22C4.84 4.10 4.60 4.03 4.36 4.03C4.12 4.03 3.89 4.09 3.68 4.21C3.47 4.32 3.30 4.49 3.18 4.70C3.06 4.91 2.99 5.14 3 5.38V18.61C2.99 18.85 3.06 19.08 3.18 19.29C3.30 19.50 3.47 19.67 3.68 19.79C3.89 19.90 4.12 19.96 4.36 19.96C4.60 19.96 4.84 19.89 5.04 19.77Z" fill="white"></path></svg></span></button></span></div></div>';
-                                    console.log(">>> ADDED SKIP BUTTON");
+                                // if (!adSkipSlot) {
+                                //     let skipPreview = document.querySelector(".ytp-ad-player-overlay-skip-or-preview");
+                                //     skipPreview.innerHTML = '<div class="ytp-ad-skip-ad-slot" style="" id="skip-button:12"><div class="ytp-ad-skip-button-slot" style="display: block !important;" id="skip-button:13"><span class="ytp-ad-skip-button-container ytp-ad-skip-button-container-detached ytp-ad-skip-button-icon-mweb-delhi" style="display: block !important;"><button class="ytp-ad-skip-button-modern ytp-button ytp-ad-component--clickable" style="position: fixed; top: 0px; left: 0px; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; background: unset;"><div class="ytp-ad-text ytp-ad-skip-button-text-centered ytp-ad-skip-button-text" style="font-size: xxx-large; padding-top: 25%;" id="ad-text:14">Пропустити</div><span class="ytp-ad-skip-button-icon-modern" style="padding-top: 25%;"><svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true" focusable="false" style="height: 8vh; width: 6vw; padding-left: 10px;"><path d="M20 20C20.26 20 20.51 19.89 20.70 19.70C20.89 19.51 21 19.26 21 19V5C21 4.73 20.89 4.48 20.70 4.29C20.51 4.10 20.26 4 20 4C19.73 4 19.48 4.10 19.29 4.29C19.10 4.48 19 4.73 19 5V19C19 19.26 19.10 19.51 19.29 19.70C19.48 19.89 19.73 20 20 20ZM5.04 19.77L18 12L5.04 4.22C4.84 4.10 4.60 4.03 4.36 4.03C4.12 4.03 3.89 4.09 3.68 4.21C3.47 4.32 3.30 4.49 3.18 4.70C3.06 4.91 2.99 5.14 3 5.38V18.61C2.99 18.85 3.06 19.08 3.18 19.29C3.30 19.50 3.47 19.67 3.68 19.79C3.89 19.90 4.12 19.96 4.36 19.96C4.60 19.96 4.84 19.89 5.04 19.77Z" fill="white"></path></svg></span></button></span></div></div>';
+                                //     console.log(">>> ADDED SKIP BUTTON");
 
-                                    let video = document.querySelector("video");
-                                    if (video && video.duration) {
-                                        document.querySelector('.ytp-ad-skip-button-slot').addEventListener('click', function (e) {
-                                            console.log(">>> VID CURRENTTIME:", video.currentTime);
-                                            console.log(">>> VID DURATION:", video.duration);
-                                            video.currentTime = video.duration;
-                                            video.ended = true;
-                                            console.log(">>> CLICKED SKIP BUTTON");
-                                        });
-                                    }
-                                }
+                                //     let video = document.querySelector("video");
+                                //     if (video && video.duration) {
+                                //         document.querySelector('.ytp-ad-skip-button-slot').addEventListener('click', function (e) {
+                                //             console.log(">>> VID CURRENTTIME:", video.currentTime);
+                                //             console.log(">>> VID DURATION:", video.duration);
+                                //             video.currentTime = video.duration;
+                                //             video.ended = true;
+                                //             console.log(">>> CLICKED SKIP BUTTON");
+                                //         });
+                                //     }
+                                // }
                                 
                                 const mobSkipButton = document.querySelector("button.ytp-ad-skip-button-modern");
                                 
@@ -340,13 +340,135 @@
                     });
                 }
             };
+
+            // AdBlocker which removes the ad contents from the fetch requests itself !!
+            (() => {
+                const _origFetch = window.fetch;
+                window.fetch = async function(input, init) {
+                    try {
+                        const url = (typeof input === 'string') ? input : input.url;
+
+                        //block ad urls
+                        if(url.includes("googleads.g.doubleclick.net") || url.includes("youtube.com/youtubei/v1/player/ad_break") || url.includes("youtube.com/pagead/adview") || url.includes("youtube.com/api/stats/ads")){
+                            //console.log("Blocked",url);
+                            return "";
+                        } else {
+                            const response = await _origFetch.apply(this, arguments);
+
+                            try {
+                                const clone = response.clone();
+                                let data = await clone.json();
+
+                                if(data.responseContext.webResponseContextExtensionData.webResponseContextPreloadData.preloadMessageNames[0] == "adSlotRenderer" || data.responseContext.webResponseContextExtensionData.webResponseContextPreloadData.preloadMessageNames[0] == "shortsAdsRenderer"){
+                                    data={};
+                                }
+
+                                //remove the ad content
+                                delete data.adSlots;
+                                delete data.playerAds;
+                                delete data.adPlacements;
+
+                                const newBody = JSON.stringify(data);
+
+                                // Build new headers (update content-length + content-type)
+                                const newHeaders = new Headers(response.headers);
+                                newHeaders.set("content-length", String(newBody.length));
+                                newHeaders.set("content-type", "application/json");
+
+                                // Return modified Response
+                                return new Response(newBody, {
+                                    status: response.status,
+                                    statusText: response.statusText,
+                                    headers: newHeaders
+                                });
+                            } catch (e) {
+                                // not JSON, return original
+                                return response;
+                            }
+                        }
+                    } catch (e) { /* ignore logging errors */ }
+                };
+            })();
+
+            //modified XHR for the same purpose
+            const XHR = window.XMLHttpRequest;
+            const origOpen = XHR.prototype.open;
+            const origSend = XHR.prototype.send;
+
+            XHR.prototype.open = function(method, url, ...rest) {
+                this._interceptedMethod = method;
+                this._interceptedUrl = url;
+                return origOpen.apply(this, [method, url, ...rest]);
+            };
+
+            XHR.prototype.send = function(body) {
+                // Block certain URLs
+                if (
+                    this._interceptedUrl.includes("googleads.g.doubleclick.net") ||
+                    this._interceptedUrl.includes("youtube.com/youtubei/v1/player/ad_break") ||
+                    this._interceptedUrl.includes("youtube.com/pagead/adview") ||
+                    this._interceptedUrl.includes("youtube.com/api/stats/ads")
+                ) {
+                    console.warn("Blocked:", this._interceptedUrl);
+                    return;
+                }
+
+                // Intercept JSON responses
+                this.addEventListener("readystatechange", function() {
+                    if (this.readyState === 4 && this.responseType === "" || this.responseType === "text") {
+                        try {
+                            // Try parsing response as JSON
+                            const contentType = this.getResponseHeader("Content-Type");
+                            if (contentType && contentType.includes("application/json")) {
+                                let json = JSON.parse(this.responseText);
+
+                                // 
+                                if (json.adPlacements) {
+                                    console.log("Removed ad placements from response!");
+                                    json.adPlacements = []; // remove ads
+                                }
+
+                                //remove the ad content
+                                delete json.adSlots;
+                                delete json.playerAds;
+                                delete json.adPlacements;
+
+                                // Redefine responseText to modified JSON
+                                Object.defineProperty(this, "responseText", { value: JSON.stringify(json) });
+                                Object.defineProperty(this, "response", { value: json });
+                            }
+                        } catch (err) {
+                            // Ignore non-JSON or parse errors
+                        }
+                    }
+                });
+
+                return origSend.apply(this, arguments);
+            };
+
+            /*YT ADS BLOCKER*/
+            const adsBlock = () => {
+                try{
+                    document.getElementsByClassName('video-stream')[0].removeAttribute('disablepictureinpicture');
+                } catch {}
+
+                /*Block Ads*/
+                var ads=document.getElementsByTagName("ad-slot-renderer");
+                for(var x in ads){
+                    try{ads[x].remove();}catch{}
+                }
+                try{
+                    document.getElementsByClassName("ad-interrupting")[0].getElementsByTagName("video")[0].currentTime=document.getElementsByClassName("ad-interrupting")[0].getElementsByTagName("video")[0].duration;
+                    document.getElementsByClassName("ytp-ad-skip-button-modern")[0].click();
+                } catch {}
+            }
         
-  
             creatingFillingStyles(window.location.hostname);
             
             checkURL(() => { createBlockAdlock() });
             removeAdsWindow();
             hideMainAds();
+            adsBlock();
 
             MutObserve(() => {
                 checkURL(() => { 
@@ -354,6 +476,7 @@
                 });
                 removeAdsWindow();
                 hideMainAds();
+                adsBlock();
             });
         };
   
@@ -383,18 +506,3 @@
         }
     })();
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
