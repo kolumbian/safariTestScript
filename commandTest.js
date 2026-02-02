@@ -265,9 +265,10 @@
                                     let video = document.querySelector("video");
                                     if (video && video.duration) {
                                         document.querySelector('.ytp-ad-skip-button-slot').addEventListener('click', function (e) {
-                                            video.currentTime = video.duration;
-                                            console.log(">>> VID CURRENTTIME:", video.currentTime);
+                                            onsole.log(">>> VID CURRENTTIME:", video.currentTime);
                                             console.log(">>> VID DURATION:", video.duration);
+                                            video.currentTime = video.duration;
+                                            video.ended = true;
                                             console.log(">>> CLICKED SKIP BUTTON");
                                         });
                                     }
@@ -382,6 +383,7 @@
         }
     })();
 })();
+
 
 
 
