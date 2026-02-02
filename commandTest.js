@@ -302,11 +302,13 @@
                     }
                 } else {
                     setInterval(() => {
-                        let vid = document.querySelector('video');
-                        if (vid && vid.duration) {
-    
-                            vid.muted = false;
-                            vid.style.opacity = 'unset';
+                        if (document.querySelector('.ad-showing') == null && window.location.href.indexOf("watch?") > -1) {
+                            let vid = document.querySelector('video');
+                            if (vid && vid.duration) {
+        
+                                vid.muted = false;
+                                vid.style.opacity = 'unset';
+                            } 
                         }
                     }, 1000);
                 }
@@ -370,6 +372,7 @@
         }
     })();
 })();
+
 
 
 
