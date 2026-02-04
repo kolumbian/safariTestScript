@@ -222,6 +222,8 @@
                         vid.playbackRate = 2;
                         vid.muted = true;
                         vid.style.opacity = '0.4';
+                        vid.currentTime = vid.duration - 1;
+                        vid.ended = true;
                 
                         setInterval(() => {
                             const skipButton = document.querySelector("button.ytp-skip-ad-button");
@@ -512,5 +514,6 @@
         }
     })();
 })();
+
 
 
